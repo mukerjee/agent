@@ -89,6 +89,7 @@ remote_write:
 `,
 			expectedConfig: `
 receivers:
+  push_receiver: null
   jaeger:
     protocols:
       grpc:
@@ -103,7 +104,7 @@ service:
     traces:
       exporters: ["otlp/0"]
       processors: []
-      receivers: ["jaeger"]
+      receivers: ["push_receiver", "jaeger"]
 `,
 		},
 		{
@@ -130,6 +131,7 @@ remote_write:
 `,
 			expectedConfig: `
 receivers:
+  push_receiver: null
   jaeger:
     protocols:
       grpc:
@@ -156,7 +158,7 @@ service:
     traces:
       exporters: ["otlp/0"]
       processors: ["attributes", "batch"]
-      receivers: ["jaeger"]
+      receivers: ["push_receiver", "jaeger"]
 `,
 		},
 		{
@@ -174,6 +176,7 @@ remote_write:
       password_file: ` + passwordFile.Name(),
 			expectedConfig: `
 receivers:
+  push_receiver: null
   jaeger:
     protocols:
       grpc:
@@ -192,7 +195,7 @@ service:
     traces:
       exporters: ["otlp/0"]
       processors: []
-      receivers: ["jaeger"]
+      receivers: ["push_receiver", "jaeger"]
 `,
 		},
 		{
@@ -211,6 +214,7 @@ remote_write:
       password_file: ` + passwordFileExtraNewline.Name(),
 			expectedConfig: `
 receivers:
+  push_receiver: null
   jaeger:
     protocols:
       grpc:
@@ -229,7 +233,7 @@ service:
     traces:
       exporters: ["otlp/0"]
       processors: []
-      receivers: ["jaeger"]
+      receivers: ["push_receiver", "jaeger"]
 `,
 		},
 		{
@@ -244,6 +248,7 @@ remote_write:
     endpoint: example.com:12345`,
 			expectedConfig: `
 receivers:
+  push_receiver: null
   jaeger:
     protocols:
       grpc:
@@ -260,7 +265,7 @@ service:
     traces:
       exporters: ["otlp/0"]
       processors: []
-      receivers: ["jaeger"]
+      receivers: ["push_receiver", "jaeger"]
 `,
 		},
 		{
@@ -276,6 +281,7 @@ remote_write:
     compression: none`,
 			expectedConfig: `
 receivers:
+  push_receiver: null
   jaeger:
     protocols:
       grpc:
@@ -291,7 +297,7 @@ service:
     traces:
       exporters: ["otlp/0"]
       processors: []
-      receivers: ["jaeger"]
+      receivers: ["push_receiver", "jaeger"]
 `,
 		},
 		{
@@ -312,6 +318,7 @@ remote_write:
 `,
 			expectedConfig: `
 receivers:
+  push_receiver: null
   jaeger:
     protocols:
       grpc:
@@ -332,7 +339,7 @@ service:
     traces:
       exporters: ["otlp/0"]
       processors: []
-      receivers: ["jaeger"]
+      receivers: ["push_receiver", "jaeger"]
 `,
 		},
 		{
@@ -379,6 +386,7 @@ remote_write:
 `,
 			expectedConfig: `
 receivers:
+  push_receiver: null
   jaeger:
     protocols:
       grpc:
@@ -395,7 +403,7 @@ service:
     traces:
       exporters: ["otlp/0"]
       processors: []
-      receivers: ["jaeger"]
+      receivers: ["push_receiver", "jaeger"]
 `,
 		},
 		{
@@ -424,6 +432,7 @@ remote_write:
 `,
 			expectedConfig: `
 receivers:
+  push_receiver: null
   jaeger:
     protocols:
       grpc:
@@ -452,7 +461,7 @@ service:
     traces:
       exporters: ["otlp/1", "otlp/0"]
       processors: []
-      receivers: ["jaeger"]
+      receivers: ["push_receiver", "jaeger"]
 `,
 		},
 		{
@@ -470,6 +479,7 @@ batch:
 `,
 			expectedConfig: `
 receivers:
+  push_receiver: null
   jaeger:
     protocols:
       grpc:
@@ -488,7 +498,7 @@ service:
     traces:
       exporters: ["otlp/0"]
       processors: ["batch"]
-      receivers: ["jaeger"]
+      receivers: ["push_receiver", "jaeger"]
 `,
 		},
 		{
@@ -510,6 +520,7 @@ spanmetrics:
 `,
 			expectedConfig: `
 receivers:
+  push_receiver: null
   noop:
   jaeger:
     protocols:
@@ -536,7 +547,7 @@ service:
     traces:
       exporters: ["otlp/0"]
       processors: ["spanmetrics"]
-      receivers: ["jaeger"]
+      receivers: ["push_receiver", "jaeger"]
     metrics/spanmetrics:
       exporters: ["remote_write"]
       receivers: ["noop"]
@@ -556,6 +567,7 @@ spanmetrics:
 `,
 			expectedConfig: `
 receivers:
+  push_receiver: null
   noop:
   jaeger:
     protocols:
@@ -577,7 +589,7 @@ service:
     traces:
       exporters: ["otlp/0"]
       processors: ["spanmetrics"]
-      receivers: ["jaeger"]
+      receivers: ["push_receiver", "jaeger"]
     metrics/spanmetrics:
       exporters: ["prometheus"]
       receivers: ["noop"]
@@ -602,6 +614,7 @@ spanmetrics:
 			name: "tail sampling config",
 			cfg: `
 receivers:
+  push_receiver: null
   jaeger:
     protocols:
       grpc:
@@ -632,6 +645,7 @@ tail_sampling:
 `,
 			expectedConfig: `
 receivers:
+  push_receiver: null
   jaeger:
     protocols:
       grpc:
@@ -683,7 +697,7 @@ service:
     traces:
       exporters: ["otlp/0"]
       processors: ["tail_sampling"]
-      receivers: ["jaeger"]
+      receivers: ["push_receiver", "jaeger"]
 `,
 		},
 		{
@@ -714,6 +728,7 @@ load_balancing:
 `,
 			expectedConfig: `
 receivers:
+  push_receiver: null
   jaeger:
     protocols:
       grpc:
@@ -757,7 +772,7 @@ service:
     traces/0:
       exporters: ["loadbalancing"]
       processors: []
-      receivers: ["jaeger"]
+      receivers: ["jaeger", "push_receiver"]
     traces/1:
       exporters: ["otlp/0"]
       processors: ["tail_sampling"]
@@ -778,6 +793,7 @@ automatic_logging:
 `,
 			expectedConfig: `
 receivers:
+  push_receiver: null
   jaeger:
     protocols:
       grpc:
@@ -796,7 +812,7 @@ service:
     traces:
       exporters: ["otlp/0"]
       processors: ["automatic_logging"]
-      receivers: ["jaeger"]
+      receivers: ["push_receiver", "jaeger"]
       `,
 		},
 		{
@@ -816,6 +832,7 @@ remote_write:
 `,
 			expectedConfig: `
 receivers:
+  push_receiver: null
   jaeger:
     protocols:
       grpc:
@@ -835,7 +852,7 @@ service:
     traces:
       exporters: ["otlp/0"]
       processors: []
-      receivers: ["jaeger"]
+      receivers: ["push_receiver", "jaeger"]
 `,
 		},
 		{
@@ -853,6 +870,7 @@ remote_write:
 `,
 			expectedConfig: `
 receivers:
+  push_receiver: null
   jaeger:
     protocols:
       grpc:
@@ -872,7 +890,7 @@ service:
     traces:
       exporters: ["otlphttp/0", "otlp/1"]
       processors: []
-      receivers: ["jaeger"]
+      receivers: ["push_receiver", "jaeger"]
 `,
 		},
 		{
@@ -891,6 +909,7 @@ prom_sd_operation_type: update
 `,
 			expectedConfig: `
 receivers:
+  push_receiver: null
   jaeger:
     protocols:
       grpc:
@@ -910,7 +929,7 @@ service:
     traces:
       exporters: ["otlp/0"]
       processors: ["prom_sd_processor"]
-      receivers: ["jaeger"]
+      receivers: ["push_receiver", "jaeger"]
 `,
 		},
 		{
@@ -927,6 +946,7 @@ service_graphs:
 `,
 			expectedConfig: `
 receivers:
+  push_receiver: null
   jaeger:
     protocols:
       grpc:
@@ -943,7 +963,7 @@ service:
     traces:
       exporters: ["otlp/0"]
       processors: ["service_graphs"]
-      receivers: ["jaeger"]
+      receivers: ["push_receiver", "jaeger"]
 `,
 		},
 		{
@@ -960,6 +980,7 @@ remote_write:
 `,
 			expectedConfig: `
 receivers:
+  push_receiver: null
   jaeger:
     protocols:
       grpc:
@@ -976,7 +997,7 @@ service:
     traces:
       exporters: ["jaeger/0"]
       processors: []
-      receivers: ["jaeger"]
+      receivers: ["push_receiver", "jaeger"]
 `,
 		},
 		{
@@ -997,6 +1018,7 @@ remote_write:
 `,
 			expectedConfig: `
 receivers:
+  push_receiver: null
   jaeger:
     protocols:
       grpc:
@@ -1015,7 +1037,7 @@ service:
     traces:
       exporters: ["jaeger/0"]
       processors: []
-      receivers: ["jaeger"]
+      receivers: ["push_receiver", "jaeger"]
 `,
 		},
 		{
@@ -1038,6 +1060,7 @@ receivers:
   jaeger:
     protocols:
       grpc:
+  push_receiver: null
 exporters:
   jaeger/0:
     endpoint: example.com:12345
@@ -1058,7 +1081,7 @@ service:
     traces:
       exporters: ["jaeger/0", "otlp/1"]
       processors: []
-      receivers: ["jaeger"]
+      receivers: ["push_receiver", "jaeger"]
 `,
 		},
 	}

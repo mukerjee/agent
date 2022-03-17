@@ -27,7 +27,7 @@ type LokiExporterConfig struct {
 	Labels           map[string]string
 }
 
-// LokiExporter is the struct of the loki exporter
+// LokiExporter will send logs & errors to loki
 type LokiExporter struct {
 	li             lokiInstance
 	seTimeout      time.Duration
@@ -36,7 +36,7 @@ type LokiExporter struct {
 	sourceMapStore sourcemaps.SourceMapStore
 }
 
-// NewLokiExporter creates a new Loki loki exporter with the given
+// NewLokiExporter creates a new Loki exporter with the given
 // configuration
 func NewLokiExporter(logger kitlog.Logger, conf LokiExporterConfig, sourceMapStore sourcemaps.SourceMapStore) AppO11yReceiverExporter {
 
