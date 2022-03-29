@@ -1,6 +1,7 @@
 package exporters
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -55,7 +56,7 @@ func (le *LokiExporter) Name() string {
 }
 
 // Export implements the AppDataExporter interface
-func (le *LokiExporter) Export(payload models.Payload) error {
+func (le *LokiExporter) Export(ctx context.Context, payload models.Payload) error {
 	meta := payload.Meta.KeyVal()
 
 	var err error = nil
